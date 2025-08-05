@@ -11,17 +11,19 @@
 
 ### Screenshots
 
-![Game Screenshot](composeApp/src/androidMain/res/drawable/demomazeimg.webp)
+![Game Screenshot](https://raw.githubusercontent.com/SatyamkrJha85/Cyber-Maze/main/composeApp/src/androidMain/res/drawable/demomazeimg.webp)
 *Cyber Maze gameplay showing the futuristic maze interface*
 
-![Maze Layout](composeApp/src/androidMain/res/drawable/maze.png)
-*Maze generation and layout visualization*
+
 
 ### Demo Video
 
-https://github.com/yourusername/cyber-maze/assets/composeApp/src/androidMain/res/drawable/demovideo.mp4
+<video width="100%" controls>
+  <source src="https://raw.githubusercontent.com/SatyamkrJha85/Cyber-Maze/main/composeApp/src/androidMain/res/drawable/demovideo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
-*Watch the demo video to see Cyber Maze in action*
+
 
 ### Gameplay Preview
 
