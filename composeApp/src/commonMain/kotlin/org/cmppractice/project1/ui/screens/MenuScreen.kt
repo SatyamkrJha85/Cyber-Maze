@@ -1,5 +1,6 @@
 package org.cmppractice.project1.ui.screens
 
+import GameState
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background

@@ -27,7 +27,8 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun StatsScreen(
-    onBackPressed: () -> Unit
+    onBackPressed: () -> Unit,
+    gameState: Any? = null
 ) {
     val themeColors = MaterialTheme.colors
     val infiniteTransition = rememberInfiniteTransition()

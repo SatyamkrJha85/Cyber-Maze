@@ -61,8 +61,8 @@ sealed class PowerUp {
     
     fun getIcon(): ImageVector {
         return when (this) {
-            is SpeedBoost -> Icons.Default.FlashOn
-            is TimeFreeze -> Icons.Default.Timer
+            is SpeedBoost -> Icons.Default.Star
+            is TimeFreeze -> Icons.Default.Star
             is ComboMultiplier -> Icons.Default.Star
             is WallBreaker -> Icons.Default.Build
             is Teleporter -> Icons.Default.LocationOn
@@ -277,8 +277,8 @@ fun MazeGameScreen(
     LaunchedEffect(currentState.level) {
         val newPowerUps = mutableListOf<Pair<Int, Int>>()
         repeat(3) {
-            val x = Random.nextInt(1, game.width - 1)
-            val y = Random.nextInt(1, game.height - 1)
+            val x = Random.nextInt(1, game.getWidth() - 1)
+            val y = Random.nextInt(1, game.getHeight() - 1)
             if (maze[y][x] == '.') {
                 newPowerUps.add(Pair(x, y))
             }
@@ -292,10 +292,6 @@ fun MazeGameScreen(
         activePowerUps = activePowerUps.mapValues { (_, duration) -> duration - 1 }
             .filter { (_, duration) -> duration > 0 }
     }
-
-    // Animated values
-    val headerScale = remember { Animatable(0.8f) }
-    val controlsSlide = remember { Animatable(-100f) }
 
     LaunchedEffect(Unit) {
         headerScale.animateTo(1f, animationSpec = spring(dampingRatio = 0.7f))
@@ -329,7 +325,7 @@ fun MazeGameScreen(
         
         // Check if move is valid (with wall breaker power-up)
         val canMove = if (activePowerUps.containsKey(PowerUp.WallBreaker)) {
-            newX in 0 until game.width && newY in 0 until game.height
+            newX in 0 until game.getWidth() && newY in 0 until game.getHeight()
         } else {
             game.isValidMove(newX, newY)
         }
@@ -513,8 +509,8 @@ fun MazeGameScreen(
                     ) {
                         AnimatedStatBox(
                             title = "TIME",
-                            value = "${timeRemaining / 60}:${String.format("%02d", timeRemaining % 60)}",
-                            icon = Icons.Default.Timer,
+                            value = "${timeRemaining / 60}:${(timeRemaining % 60).toString().padStart(2, '0')}",
+                            icon = Icons.Default.Star,
                             color = if (timeRemaining < 30) Color(0xFFF44336) else Color(0xFF2196F3)
                         )
                         
@@ -1116,6 +1112,9 @@ class Game(private val width: Int, private val height: Int) {
     private var goalX = width - 1
     private var goalY = height - 1
     private val maze: Array<CharArray> = Array(height) { CharArray(width) { '.' } }
+    
+    fun getWidth(): Int = width
+    fun getHeight(): Int = height
 
     init {
         generateNewMaze()
